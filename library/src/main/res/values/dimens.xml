@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="status_view_reload">20sp</dimen>
+    <dimen name="status_view_error_tip">16sp</dimen>
+    <dimen name="status_view_space">5dp</dimen>
+</resources>

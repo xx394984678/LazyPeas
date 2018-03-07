@@ -1,4 +1,4 @@
-package com.lirui.lazypeas.library.view.stateview;
+package com.lirui.lazypeas.library.view.statusview;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -20,14 +20,9 @@ import java.util.Map;
  * Created by lirui on 2018/3/2.
  */
 
-public class StateView extends FrameLayout implements View.OnClickListener {
+public class StatusView extends FrameLayout implements View.OnClickListener {
     private LayoutInflater mInflater;
     private Map<Integer, View> mResIdMap = new HashMap<>();
-
-//    private int errorResId = StateViewDefaultConfig.ERROR_RES_ID;
-//    private int emptyResId = StateViewDefaultConfig.EMPTY_RES_ID;
-//    private int loadingResId = StateViewDefaultConfig.LOADING_RES_ID;
-//    private int netWorkErrorResId = StateViewDefaultConfig.NETWORK_ERROR_RES_ID;
 
     private int errorResId = 0;
     private int emptyResId = 0;
@@ -35,61 +30,28 @@ public class StateView extends FrameLayout implements View.OnClickListener {
     private int netWorkErrorResId = 0;
     private StateViewReloadListener stateViewReloadListener;
 
-    public StateView(@NonNull Context context) {
+    public StatusView(@NonNull Context context) {
         this(context, null);
     }
 
-    public StateView(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public StatusView(@NonNull Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public StateView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public StatusView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         mInflater = LayoutInflater.from(context);
     }
 
-    public static StateViewBuilder newStateView(Activity activity) {
-        return new StateViewBuilder(activity);
-    }
-
-    public static StateViewBuilder newStateView(Fragment fragment) {
-        return new StateViewBuilder(fragment);
-    }
-
-    public static StateViewBuilder newStateView(View view) {
-        return new StateViewBuilder(view);
-    }
-
-    public static StateView createWithBuilder(StateViewBuilder stateViewBuilder) {
-        StateView stateView;
-        switch (stateViewBuilder.enterType) {
-            case StateViewConfig.STATE_VIEW_BUILDER_ACTIVITY_TYPE:
-                stateView = wrap(stateViewBuilder.activity);
-                break;
-            case StateViewConfig.STATE_VIEW_BUILDER_FRAGMENT_TYPE:
-                stateView = wrap(stateViewBuilder.fragment);
-                break;
-            default:
-                stateView = wrap(stateViewBuilder.view);
-                break;
-        }
-        stateView.emptyResId = stateViewBuilder.stateViewEmptyResId;
-        stateView.loadingResId = stateViewBuilder.stateViewLoadingResId;
-        stateView.netWorkErrorResId = stateViewBuilder.stateViewNetWorkErrorResId;
-        stateView.errorResId = stateViewBuilder.stateViewErrorResId;
-        stateView.stateViewReloadListener = stateViewBuilder.stateViewReloadListener;
-        return stateView;
-    }
-
-    public static StateView wrap(Activity activity) {
+    public static StatusView wrap(Activity activity) {
         return wrap(((ViewGroup) activity.findViewById(android.R.id.content)).getChildAt(0));
     }
 
-    public static StateView wrap(Fragment fragment) {
+    public static StatusView wrap(Fragment fragment) {
         return wrap(fragment.getView());
     }
 
-    public static StateView wrap(View view) {
+    public static StatusView wrap(View view) {
         if (view == null) {
             throw new NullPointerException("content view can not be null");
         }
@@ -103,7 +65,7 @@ public class StateView extends FrameLayout implements View.OnClickListener {
         parent.removeView(view);
 
         //初始化自定义view
-        StateView stateView = new StateView(view.getContext());
+        StatusView stateView = new StatusView(view.getContext());
         stateView.addView(view);
         stateView.addContentViewToMap(view);
 
@@ -113,39 +75,59 @@ public class StateView extends FrameLayout implements View.OnClickListener {
     }
 
     private void addContentViewToMap(View view) {
-        mResIdMap.put(StateViewConfig.CONTENT_RES_ID, view);
+        mResIdMap.put(StatusViewConfig.CONTENT_RES_ID, view);
+    }
+
+    public StatusView setErrorResId(int errorResId) {
+        this.errorResId = errorResId;
+        return this;
+    }
+
+    public StatusView setEmptyResId(int emptyResId) {
+        this.emptyResId = emptyResId;
+        return this;
+    }
+
+    public StatusView setLoadingResId(int loadingResId) {
+        this.loadingResId = loadingResId;
+        return this;
+    }
+
+    public StatusView setNetWorkErrorResId(int netWorkErrorResId) {
+        this.netWorkErrorResId = netWorkErrorResId;
+        return this;
     }
 
     public final void showLoading() {
         if (loadingResId == 0) {
-            loadingResId = StateViewConfig.CONFIG.loadingResId;
+            loadingResId = StatusViewConfig.CONFIG.loadingResId;
         }
         show(loadingResId);
     }
 
     public final void showEmpty() {
         if (emptyResId == 0) {
-            emptyResId = StateViewConfig.CONFIG.emptyResId;
+            emptyResId = StatusViewConfig.CONFIG.emptyResId;
         }
         show(emptyResId);
     }
 
     public final void showError() {
         if (errorResId == 0) {
-            errorResId = StateViewConfig.CONFIG.errorResId;
+            errorResId = StatusViewConfig.CONFIG.errorResId;
         }
         show(errorResId);
     }
 
-    public final void showNerWorkError() {
+    public final void showNetWorkError() {
         if (netWorkErrorResId == 0) {
-            netWorkErrorResId = StateViewConfig.CONFIG.netWorkErrorResId;
+            netWorkErrorResId = StatusViewConfig.CONFIG.netWorkErrorResId;
         }
         show(netWorkErrorResId);
     }
 
     public final void showContent() {
-        show(StateViewConfig.CONTENT_RES_ID);
+        show(StatusViewConfig.CONTENT_RES_ID);
     }
 
     private void show(int resId) {
@@ -175,7 +157,7 @@ public class StateView extends FrameLayout implements View.OnClickListener {
         return view;
     }
 
-    public StateView setStateViewReloadListener(StateViewReloadListener stateViewReloadListener) {
+    public StatusView setStateViewReloadListener(StateViewReloadListener stateViewReloadListener) {
         this.stateViewReloadListener = stateViewReloadListener;
         return this;
     }

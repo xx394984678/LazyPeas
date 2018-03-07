@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
 
+    <com.lirui.lazypeas.library.view.loadview.StatusLoadingView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/status_view_refresh" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:text="@string/status_view_clam"
+        android:layout_marginTop="@dimen/status_view_space"
+        android:textSize="@dimen/status_view_error_tip"
+        android:layout_height="wrap_content" />
 </LinearLayout>

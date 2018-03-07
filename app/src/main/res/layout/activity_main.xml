@@ -6,35 +6,8 @@
     android:orientation="vertical"
     tools:context="com.lirui.lazypeas.MainActivity">
 
-    <LinearLayout
-        android:id="@+id/hello"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:text="我是第一条"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:layout_width="match_parent"
-            android:text="我是第2条"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:layout_width="match_parent"
-            android:text="我是第3条"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:layout_width="match_parent"
-            android:text="我是第4条"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
     <Button
-        android:id="@+id/button_1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <Button
-        android:id="@+id/button_2"
-        android:layout_width="match_parent"
+        android:id="@+id/sdsdsd"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 </LinearLayout>

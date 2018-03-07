@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">My Library</string>
+    <string name="status_view_reload">重新加载</string>
+    <string name="status_view_clam">莫慌</string>
+    <string name="status_view_error_tip">请求好像出错了</string>
+    <string name="status_view_net_work_error_tip">网络出了问题</string>
+    <string name="status_view_empty">诶？啥也没有</string>
 </resources>
