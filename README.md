@@ -29,12 +29,12 @@ StatusView statusView = StatusView.wrap(this)
 
 ```
 statusView.wrap(this)
-		.setStateViewReloadListener(new StatusView.StateViewReloadListener() {
+	.setStateViewReloadListener(new StatusView.StateViewReloadListener() {
 		@Override
 		public void onStateViewReloadClicked() {
-		//当点击重新加载
+			//当点击重新加载
 		}
-		});
+	});
 ```
 
 5.举例，自定义的error_layout与network_error_layout 重新加载的按钮id设置为`@id/reload`
