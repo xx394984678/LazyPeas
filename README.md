@@ -58,7 +58,7 @@ statusView.wrap(this)
 
 ### 最后
 我参考的资源，万分感谢
--[XFrame](https://github.com/youth5201314/XFrame)
--[工匠若水](http://blog.csdn.net/yanbober/article/details/45970721)
+- [XFrame](https://github.com/youth5201314/XFrame)
+- [工匠若水](http://blog.csdn.net/yanbober/article/details/45970721)
 
 其实代码跟XFrame的差不多，但是我想把网络模块也集成在这个框架里，所以我自己写了一个轮子出来，还会再更新。另外，每一行代码干了什么，我都摸透了，这得感谢[若水大大](http://blog.csdn.net/yanbober)
