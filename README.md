@@ -46,12 +46,12 @@ statusView.wrap(this)
     android:layout_height="wrap_content" />
 ```
 
-###如何一键切换
-| api | 功能 |
+### 如何一键切换
+|api|功能|
 |---|---|
-| showLoading() | 加载界面 |
-| showEmpty() | 无数据界面 |
-| showError() | 错误界面 |
-| showNetWorkError() | 网络错误界面 |
-| showContent() | 内容界面 |
+|showLoading()| 加载界面
+|showEmpty() | 无数据界面
+|showError() | 错误界面
+|showNetWorkError() | 网络错误界面
+|showContent() | 内容界面 
 >statusView.showLoading()就可以了
