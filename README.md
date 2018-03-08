@@ -48,7 +48,7 @@ statusView.wrap(this)
 
 ###如何一键切换
 | api | 功能 |
-| ------------- |:-------------:|
+|---|---|
 | showLoading() | 加载界面 |
 | showEmpty() | 无数据界面 |
 | showError() | 错误界面 |
