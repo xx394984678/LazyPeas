@@ -13,10 +13,10 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-//        StatusViewConfig.CONFIG
-//                .setConfigErrorResId(R.layout.state_view_error)
-//                .setConfigEmptyResId(R.layout.state_view_empty)
-//                .setConfigLoadingResId(R.layout.state_view_loading)
-//                .setConfigNetWorkErrorResId(R.layout.state_view_network_error);
+        StatusViewConfig.CONFIG
+                .setConfigErrorResId(R.layout.state_view_error)
+                .setConfigEmptyResId(R.layout.state_view_empty)
+                .setConfigLoadingResId(R.layout.state_view_loading)
+                .setConfigNetWorkErrorResId(R.layout.state_view_network_error);
     }
 }

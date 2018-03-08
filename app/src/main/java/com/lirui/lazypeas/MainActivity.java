@@ -39,7 +39,16 @@ public class MainActivity extends BaseActivity implements StatusView.StateViewRe
     @Override
     public void initView() {
         statusView = StatusView.wrap(this)
-                .setStateViewReloadListener(this);
+                .setEmptyResId(R.layout.my_empty_layout)
+                .setErrorResId(R.layout.my_empty_layout)
+                .setLoadingResId(R.layout.my_empty_layout)
+                .setNetWorkErrorResId(R.layout.my_empty_layout)
+                .setStateViewReloadListener(new StatusView.StateViewReloadListener() {
+                    @Override
+                    public void onStateViewReloadClicked() {
+                        Toast.makeText(MainActivity.this, "在这个方法中写网络请求", Toast.LENGTH_SHORT).show();
+                    }
+                });
 
         findViewById(R.id.sdsdsd).setOnClickListener(new View.OnClickListener() {
             @Override
