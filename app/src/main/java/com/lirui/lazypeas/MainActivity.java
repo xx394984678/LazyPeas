@@ -8,13 +8,20 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.lirui.lazypeas.library.baseui.BaseActivity;
+import com.lirui.lazypeas.library.http.HttpApi;
+import com.lirui.lazypeas.library.http.HttpUtil;
 import com.lirui.lazypeas.library.view.statusview.StatusView;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by lirui on 2018/3/2.
  */
 
-public class MainActivity extends BaseActivity implements StatusView.StateViewReloadListener {
+public class MainActivity extends BaseActivity implements StatusView.StateViewReloadListener{
 
 
     StatusView statusView;
@@ -77,4 +84,5 @@ public class MainActivity extends BaseActivity implements StatusView.StateViewRe
     public void onStateViewReloadClicked() {
         Toast.makeText(this, "在这个方法中写网络请求", Toast.LENGTH_SHORT).show();
     }
+
 }
