@@ -1,9 +1,9 @@
 package com.lirui.lazypeas.http;
 
-import com.lirui.lazypeas.library.http.HttpUtil;
+import com.lirui.lazypeas.library.http.RetrofitUtil;
 
 public class HttpUtilI {
     public static HttpApiI getInstance() {
-        return HttpUtil.getInstance(HttpApiI.class);
+        return RetrofitUtil.getInstance(HttpApiI.class);
     }
 }

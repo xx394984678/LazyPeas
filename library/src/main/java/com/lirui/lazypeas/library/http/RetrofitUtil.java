@@ -10,18 +10,13 @@ import retrofit2.Retrofit;
 /**
  * Created by lirui on 2018/3/7.
  */
-public final class HttpUtil<T> {
-    private static final int DEBUG_CONNECT_TYPE = 1;
-    private static final int ON_LINE_CONNECT_TYPE = 2;
-    //连接类型，默认为debug方式
-    private static int connectType = DEBUG_CONNECT_TYPE;
-
-    private static volatile HttpUtil onLineInstance;
-    private static volatile HttpUtil debugInstance;
+public final class RetrofitUtil<T> {
+    private static volatile RetrofitUtil onLineInstance;
+    private static volatile RetrofitUtil debugInstance;
 
     private T api;
 
-    private HttpUtil(String baseUrl, Class<T> clz) {
+    private RetrofitUtil(String baseUrl, Class<T> clz) {
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 .readTimeout(HttpUtilConfig.CONFIG.readTimeOut, TimeUnit.MILLISECONDS)
                 .connectTimeout(HttpUtilConfig.CONFIG.connectTimeOut, TimeUnit.MILLISECONDS);
@@ -35,26 +30,16 @@ public final class HttpUtil<T> {
         api = retrofit.create(clz);
     }
 
-    /**
-     * 设置api的网络环境。可以动态切换线上环境与debug环境。仅限debug包
-     * @param connectType {@link #DEBUG_CONNECT_TYPE}代表测试环境
-     *                    {@link #ON_LINE_CONNECT_TYPE}代表线上环境
-     *
-     */
-    public void setConnectType(int connectType) {
-        HttpUtil.connectType = connectType;
-    }
-
     public static <T> T getInstance(Class<T> clz) {
         //如果是release包。须直接返回线上环境的httpApi
         if (!BuildConfig.DEBUG) {
             return getOnLineInstance(clz);
         }
         //debug包。根据链接类型来定
-        switch (connectType) {
-            case DEBUG_CONNECT_TYPE:
+        switch (HttpUtilConfig.CONFIG.connectType) {
+            case HttpUtilConfig.DEBUG_CONNECT_TYPE:
                 return getDebugInstance(clz);
-            case ON_LINE_CONNECT_TYPE:
+            case HttpUtilConfig.ON_LINE_CONNECT_TYPE:
             default:
                 return getOnLineInstance(clz);
         }
@@ -62,9 +47,9 @@ public final class HttpUtil<T> {
 
     private static <T> T getDebugInstance(Class<T> clz) {
         if (debugInstance == null) {
-            synchronized (HttpUtil.class) {
+            synchronized (RetrofitUtil.class) {
                 if (debugInstance == null) {
-                    debugInstance = new HttpUtil<>(HttpUtilConfig.CONFIG.baseDebugUrl,clz);
+                    debugInstance = new RetrofitUtil<>(HttpUtilConfig.CONFIG.baseDebugUrl,clz);
                 }
             }
         }
@@ -73,9 +58,9 @@ public final class HttpUtil<T> {
 
     private static <T> T getOnLineInstance(Class<T> clz) {
         if (onLineInstance == null) {
-            synchronized (HttpUtil.class) {
+            synchronized (RetrofitUtil.class) {
                 if (onLineInstance == null) {
-                    onLineInstance = new HttpUtil<>(HttpUtilConfig.CONFIG.baseOnLineUrl,clz);
+                    onLineInstance = new RetrofitUtil<>(HttpUtilConfig.CONFIG.baseOnLineUrl,clz);
                 }
             }
         }
