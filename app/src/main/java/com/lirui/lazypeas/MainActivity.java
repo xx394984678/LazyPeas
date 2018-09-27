@@ -7,8 +7,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.lirui.lazypeas.http.HttpUtilI;
 import com.lirui.lazypeas.library.baseui.BaseActivity;
+import com.lirui.lazypeas.library.util.LogUtilInLibrary;
 import com.lirui.lazypeas.library.view.statusview.StatusView;
+
+import java.io.IOException;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by lirui on 2018/3/2.
@@ -47,6 +56,22 @@ public class MainActivity extends BaseActivity implements StatusView.StateViewRe
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, SecondActivity.class));
+            }
+        });
+
+        HttpUtilI.getInstance().getTest().enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    LogUtilInLibrary.dWithDefaultTag(response.body().string());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
             }
         });
     }

@@ -23,7 +23,7 @@ public class MyApplication extends Application {
         HttpUtilConfig.CONFIG
                 .setReadTimeOut(10000)
                 .setConnectTimeOut(10000)
-                .setBaseDebugUrl("http://co-api.51wnl.com/calendar")
-                .setBaseOnLineUrl("http://co-api.51wnl.com/calendar");
+                .setBaseDebugUrl("http://www.wanandroid.com/")
+                .setBaseOnLineUrl("http://www.wanandroid.com/");
     }
 }

@@ -4,18 +4,12 @@ public class HttpUtilConfig {
 
     public static final HttpUtilConfig CONFIG = new HttpUtilConfig();
 
-    protected Class apiClass;
     protected String baseDebugUrl;
     protected String baseOnLineUrl;
     protected int readTimeOut = 10000;
     protected int connectTimeOut = 10000;
 
     private HttpUtilConfig() {
-    }
-
-    public HttpUtilConfig setApiClass(Class apiClass) {
-        this.apiClass = apiClass;
-        return this;
     }
 
     public HttpUtilConfig setBaseDebugUrl(String baseDebugUrl) {

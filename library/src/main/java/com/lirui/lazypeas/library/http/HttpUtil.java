@@ -10,7 +10,7 @@ import retrofit2.Retrofit;
 /**
  * Created by lirui on 2018/3/7.
  */
-public final class HttpUtil {
+public final class HttpUtil<T> {
     private static final int DEBUG_CONNECT_TYPE = 1;
     private static final int ON_LINE_CONNECT_TYPE = 2;
     //连接类型，默认为debug方式
@@ -19,9 +19,9 @@ public final class HttpUtil {
     private static volatile HttpUtil onLineInstance;
     private static volatile HttpUtil debugInstance;
 
-    private HttpApi api;
+    private T api;
 
-    private HttpUtil(String baseUrl) {
+    private HttpUtil(String baseUrl, Class<T> clz) {
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 .readTimeout(HttpUtilConfig.CONFIG.readTimeOut, TimeUnit.MILLISECONDS)
                 .connectTimeout(HttpUtilConfig.CONFIG.connectTimeOut, TimeUnit.MILLISECONDS);
@@ -32,7 +32,7 @@ public final class HttpUtil {
                 .client(okHttpClient)
                 .baseUrl(baseUrl)
                 .build();
-        api = retrofit.create(HttpApi.class);
+        api = retrofit.create(clz);
     }
 
     /**
@@ -45,40 +45,40 @@ public final class HttpUtil {
         HttpUtil.connectType = connectType;
     }
 
-    public static HttpApi getInstance() {
+    public static <T> T getInstance(Class<T> clz) {
         //如果是release包。须直接返回线上环境的httpApi
         if (!BuildConfig.DEBUG) {
-            return getOnLineInstance();
+            return getOnLineInstance(clz);
         }
         //debug包。根据链接类型来定
         switch (connectType) {
             case DEBUG_CONNECT_TYPE:
-                return getDebugInstance();
+                return getDebugInstance(clz);
             case ON_LINE_CONNECT_TYPE:
             default:
-                return getOnLineInstance();
+                return getOnLineInstance(clz);
         }
     }
 
-    private static HttpApi getDebugInstance() {
+    private static <T> T getDebugInstance(Class<T> clz) {
         if (debugInstance == null) {
             synchronized (HttpUtil.class) {
                 if (debugInstance == null) {
-                    debugInstance = new HttpUtil(HttpUtilConfig.CONFIG.baseDebugUrl);
+                    debugInstance = new HttpUtil<>(HttpUtilConfig.CONFIG.baseDebugUrl,clz);
                 }
             }
         }
-        return debugInstance.api;
+        return (T) debugInstance.api;
     }
 
-    private static HttpApi getOnLineInstance() {
+    private static <T> T getOnLineInstance(Class<T> clz) {
         if (onLineInstance == null) {
             synchronized (HttpUtil.class) {
                 if (onLineInstance == null) {
-                    onLineInstance = new HttpUtil(HttpUtilConfig.CONFIG.baseOnLineUrl);
+                    onLineInstance = new HttpUtil<>(HttpUtilConfig.CONFIG.baseOnLineUrl,clz);
                 }
             }
         }
-        return onLineInstance.api;
+        return (T) onLineInstance.api;
     }
 }
