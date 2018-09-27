@@ -2,6 +2,7 @@ package com.lirui.lazypeas;
 
 import android.app.Application;
 
+import com.lirui.lazypeas.library.http.HttpUtilConfig;
 import com.lirui.lazypeas.library.view.statusview.StatusViewConfig;
 
 /**
@@ -18,5 +19,11 @@ public class MyApplication extends Application {
                 .setConfigEmptyResId(R.layout.state_view_empty)
                 .setConfigLoadingResId(R.layout.state_view_loading)
                 .setConfigNetWorkErrorResId(R.layout.state_view_network_error);
+
+        HttpUtilConfig.CONFIG
+                .setReadTimeOut(10000)
+                .setConnectTimeOut(10000)
+                .setBaseDebugUrl("http://co-api.51wnl.com/calendar")
+                .setBaseOnLineUrl("http://co-api.51wnl.com/calendar");
     }
 }
