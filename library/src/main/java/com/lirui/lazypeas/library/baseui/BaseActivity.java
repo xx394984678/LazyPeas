@@ -13,10 +13,21 @@ public abstract class BaseActivity extends AppCompatActivity implements UICallBa
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ActivityManager.newActivity(this);
         if (getLayoutId() > 0) {
             setContentView(getLayoutId());
         }
         initData(savedInstanceState);
         initView();
+    }
+
+    @Override
+    protected void onDestroy() {
+        ActivityManager.removeActivity(this);
+        super.onDestroy();
+    }
+
+    protected void finishAll(){
+        ActivityManager.allFinishActivity();
     }
 }

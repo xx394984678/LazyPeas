@@ -1,4 +1,4 @@
-package com.lirui.lazypeas;
+package com.lirui.lazypeas.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,7 +7,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.lirui.lazypeas.http.HttpUtilI;
+import com.lirui.lazypeas.R;
+import com.lirui.lazypeas.http.HttpUtil;
 import com.lirui.lazypeas.library.baseui.BaseActivity;
 import com.lirui.lazypeas.library.util.LogUtilInLibrary;
 import com.lirui.lazypeas.library.view.statusview.StatusView;
@@ -41,16 +42,7 @@ public class MainActivity extends BaseActivity implements StatusView.StateViewRe
     @Override
     public void initView() {
         statusView = StatusView.wrap(this)
-                .setEmptyResId(R.layout.my_empty_layout)
-                .setErrorResId(R.layout.my_empty_layout)
-                .setLoadingResId(R.layout.my_empty_layout)
-                .setNetWorkErrorResId(R.layout.my_empty_layout)
-                .setStateViewReloadListener(new StatusView.StateViewReloadListener() {
-                    @Override
-                    public void onStateViewReloadClicked() {
-                        Toast.makeText(MainActivity.this, "在这个方法中写网络请求", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                .setStateViewReloadListener(this);
 
         findViewById(R.id.sdsdsd).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,7 +51,7 @@ public class MainActivity extends BaseActivity implements StatusView.StateViewRe
             }
         });
 
-        HttpUtilI.getInstance().getTest().enqueue(new Callback<ResponseBody>() {
+        HttpUtil.getInstance().getTest().enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {

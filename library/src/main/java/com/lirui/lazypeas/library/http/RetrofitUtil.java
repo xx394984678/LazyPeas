@@ -6,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by lirui on 2018/3/7.
@@ -25,6 +26,7 @@ public final class RetrofitUtil<T> {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .client(okHttpClient)
+                .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl(baseUrl)
                 .build();
         api = retrofit.create(clz);

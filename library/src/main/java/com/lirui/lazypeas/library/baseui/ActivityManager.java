@@ -11,25 +11,12 @@ import java.util.ArrayList;
  */
 
 public class ActivityManager {
-//    private static volatile ActivityManager activityManager;
     private static ArrayList<Activity> activities = new ArrayList<>();
 
     private ActivityManager() {
-
     }
-//    一个单例模式
-//    public static ActivityManager getInstance() {
-//        if (activityManager == null) {
-//            synchronized (ActivityManager.class) {
-//                if (activityManager == null) {
-//                    activityManager = new ActivityManager();
-//                }
-//            }
-//        }
-//        return activityManager;
-//    }
 
-    public void newActivity(Activity newActivity) {
+    public static void newActivity(Activity newActivity) {
         if (newActivity == null) {
             LogUtilInLibrary.eWithDefaultTag("u have a unexpected problem");
             return;
@@ -37,7 +24,7 @@ public class ActivityManager {
         activities.add(newActivity);
     }
 
-    public void removeActivity(Activity activity) {
+    public static void removeActivity(Activity activity) {
         if (activity == null) {
             LogUtilInLibrary.eWithDefaultTag("u have a unexpected problem");
             return;
@@ -48,7 +35,7 @@ public class ActivityManager {
     /**
      * 结束所有activity
      */
-    public void allFinishActivity() {
+    public static void allFinishActivity() {
         for (Activity activity : activities) {
             if (!activity.isFinishing()) {
                 activity.finish();

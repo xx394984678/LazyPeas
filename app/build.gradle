@@ -25,6 +25,7 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    implementation "com.android.support:appcompat-v7:$var.supportLibraryVersion"
+//    implementation "com.android.support:appcompat-v7:$var.supportLibraryVersion"
     implementation project(':library')
+    debugImplementation 'com.amitshekhar.android:debug-db:1.0.4'
 }

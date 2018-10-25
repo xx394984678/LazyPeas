@@ -1,9 +1,10 @@
-package com.lirui.lazypeas;
+package com.lirui.lazypeas.activity;
 
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.lirui.lazypeas.R;
 import com.lirui.lazypeas.library.baseui.BaseActivity;
 import com.lirui.lazypeas.library.view.statusview.StatusView;
 

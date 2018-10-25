@@ -1,4 +1,4 @@
-package com.lirui.lazypeas.library.view.loadview;
+package com.lirui.lazypeas.view;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
@@ -50,12 +50,6 @@ public class StatusLoadingView extends ImageView {
         } else {
             stopAnimator();
         }
-    }
-
-    @Override
-    protected void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
-        rotationAnimator.end();
     }
 
     private void startAnimator() {
