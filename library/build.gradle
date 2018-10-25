@@ -28,8 +28,7 @@ dependencies {
     api "com.squareup.retrofit2:retrofit:$var.retrofitVersion"
     api "com.squareup.okhttp3:okhttp:$var.okhttpVersion"
     api "com.android.support.constraint:constraint-layout:$var.constraintVersion"
-    api 'com.alibaba:fastjson:1.2.49'
-    api 'com.google.code.gson:gson:2.8.5'
-    api 'com.squareup.retrofit2:converter-gson:2.4.0'
-    api 'com.github.bumptech.glide:glide:3.7.0'
+    api "com.alibaba:fastjson:$var.fastjsonVersion"
+    api "com.squareup.retrofit2:converter-gson:$var.gsonForRetrofit"
+    api "com.github.bumptech.glide:glide:$var.glideVersion"
 }
