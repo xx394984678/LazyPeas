@@ -1,6 +1,5 @@
 package com.lirui.lazypeas.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -8,23 +7,14 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.lirui.lazypeas.R;
-import com.lirui.lazypeas.http.HttpUtil;
 import com.lirui.lazypeas.library.baseui.BaseActivity;
-import com.lirui.lazypeas.library.util.LogUtilInLibrary;
 import com.lirui.lazypeas.library.view.statusview.StatusView;
-
-import java.io.IOException;
-
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * Created by lirui on 2018/3/2.
  */
 
-public class MainActivity extends BaseActivity implements StatusView.StateViewReloadListener{
+public class MainActivity extends BaseActivity implements StatusView.StateViewReloadListener {
 
 
     StatusView statusView;
@@ -44,28 +34,17 @@ public class MainActivity extends BaseActivity implements StatusView.StateViewRe
         statusView = StatusView.wrap(this)
                 .setStateViewReloadListener(this);
 
-        findViewById(R.id.sdsdsd).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, SecondActivity.class));
-            }
-        });
+        findViewById(R.id.first).setOnClickListener(this);
+        findViewById(R.id.second).setOnClickListener(this);
+        findViewById(R.id.third).setOnClickListener(this);
+        findViewById(R.id.fourth).setOnClickListener(this);
 
-        HttpUtil.getInstance().getTest().enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    LogUtilInLibrary.dWithDefaultTag(response.body().string());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+    }
 
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-
-            }
-        });
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
     }
 
     @Override
@@ -94,14 +73,23 @@ public class MainActivity extends BaseActivity implements StatusView.StateViewRe
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
-        return true;
-    }
-
-    @Override
     public void onStateViewReloadClicked() {
         Toast.makeText(this, "在这个方法中写网络请求", Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.first:
+                break;
+            case R.id.second:
+                break;
+            case R.id.third:
+                break;
+            case R.id.fourth:
+                break;
+            default:
+                break;
+        }
+    }
 }
