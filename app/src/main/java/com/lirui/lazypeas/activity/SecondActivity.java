@@ -5,7 +5,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.lirui.lazypeas.R;
-import com.lirui.lazypeas.library.baseui.BaseActivity;
+import com.lirui.lazypeas.library.presenter.BasePresenter;
 import com.lirui.lazypeas.library.view.statusview.StatusView;
 
 /**
@@ -29,6 +29,16 @@ public class SecondActivity extends BaseActivity {
     public void initView() {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         statusView = StatusView.wrap(this).setEmptyResId(R.layout.my_empty_layout);
+    }
+
+    @Override
+    public void initOther() {
+
+    }
+
+    @Override
+    public void netWorkForPageDate() {
+
     }
 
     @Override
@@ -60,5 +70,25 @@ public class SecondActivity extends BaseActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
+    }
+
+    @Override
+    protected boolean loadingAndGetPageDataOnCreate() {
+        return true;
+    }
+
+    @Override
+    protected StatusView getStatusView() {
+        return statusView;
+    }
+
+    @Override
+    protected BasePresenter getPageDataPresenter() {
+        return null;
+    }
+
+    @Override
+    protected void presenterUnBindView() {
+
     }
 }

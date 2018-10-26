@@ -1,23 +1,25 @@
 package com.lirui.lazypeas.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.lirui.lazypeas.R;
-import com.lirui.lazypeas.library.baseui.BaseActivity;
+import com.lirui.lazypeas.contract.MainContract;
+import com.lirui.lazypeas.library.presenter.BasePresenter;
 import com.lirui.lazypeas.library.view.statusview.StatusView;
+import com.lirui.lazypeas.presenter.MainPresenterImp;
 
 /**
  * Created by lirui on 2018/3/2.
  */
 
-public class MainActivity extends BaseActivity implements StatusView.StateViewReloadListener {
-
+public class MainActivity extends BaseActivity implements MainContract.View {
 
     StatusView statusView;
+    private TextView textView;
+    private MainContract.Presenter pagePresenter;
 
     @Override
     public int getLayoutId() {
@@ -34,62 +36,66 @@ public class MainActivity extends BaseActivity implements StatusView.StateViewRe
         statusView = StatusView.wrap(this)
                 .setStateViewReloadListener(this);
 
+        textView = findViewById(R.id.connect_result);
         findViewById(R.id.first).setOnClickListener(this);
         findViewById(R.id.second).setOnClickListener(this);
         findViewById(R.id.third).setOnClickListener(this);
         findViewById(R.id.fourth).setOnClickListener(this);
-
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
+    public void initOther() {
+        pagePresenter = new MainPresenterImp(this);
+    }
+
+    @Override
+    public void netWorkForPageDate() {
+        pagePresenter.onGetHomePage();
+    }
+
+    @Override
+    public void onGetPageDateSuccess(String json) {
+        showContent();
+        textView.setText(json);
+    }
+
+    @Override
+    protected boolean loadingAndGetPageDataOnCreate() {
         return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_empty:
-                statusView.showEmpty();
-                return true;
-            case R.id.action_loading:
-                statusView.showLoading();
-                return true;
-            case R.id.action_content:
-                statusView.showContent();
-                return true;
-            case R.id.action_error:
-                statusView.showError();
-                return true;
-            case R.id.action_network_error:
-                statusView.showNetWorkError();
-                return true;
-            case android.R.id.home:
-                finish();
-                return true;
-        }
-        return false;
-    }
-
-    @Override
-    public void onStateViewReloadClicked() {
-        Toast.makeText(this, "在这个方法中写网络请求", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.first:
+                startActivity(new Intent(this, SecondActivity.class));
                 break;
             case R.id.second:
+                netWorkForPageDate();
                 break;
             case R.id.third:
+                pagePresenter.getFailureData(NetWorkErrorCode.VIP_OVER);
                 break;
             case R.id.fourth:
+                pagePresenter.getFailureData(NetWorkErrorCode.USER_IS_INVALID);
                 break;
             default:
                 break;
         }
+    }
+
+    @Override
+    protected StatusView getStatusView() {
+        return statusView;
+    }
+
+    @Override
+    protected BasePresenter getPageDataPresenter() {
+        return pagePresenter;
+    }
+
+    @Override
+    protected void presenterUnBindView() {
+
     }
 }

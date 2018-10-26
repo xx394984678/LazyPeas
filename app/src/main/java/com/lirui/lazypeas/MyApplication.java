@@ -3,6 +3,7 @@ package com.lirui.lazypeas;
 import android.app.Application;
 
 import com.lirui.lazypeas.library.http.HttpUtilConfig;
+import com.lirui.lazypeas.library.util.ApplicationInUtil;
 import com.lirui.lazypeas.library.view.statusview.StatusViewConfig;
 
 /**
@@ -25,5 +26,7 @@ public class MyApplication extends Application {
                 .setConnectTimeOut(10000)
                 .setBaseDebugUrl("http://www.wanandroid.com/")
                 .setBaseOnLineUrl("http://www.wanandroid.com/");
+
+        ApplicationInUtil.initContext(this);
     }
 }

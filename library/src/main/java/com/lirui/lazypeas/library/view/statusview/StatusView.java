@@ -6,6 +6,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,22 +14,19 @@ import android.widget.FrameLayout;
 
 import com.lirui.lazypeas.library.R;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * Created by lirui on 2018/3/2.
  */
 
-public class StatusView extends FrameLayout implements View.OnClickListener {
+public class StatusView extends FrameLayout implements View.OnClickListener, StatusViewControl {
     private LayoutInflater mInflater;
-    private Map<Integer, View> mResIdMap = new HashMap<>();
+    private SparseArray<View> mResIdMap = new SparseArray<>();
 
     private int errorResId = 0;
     private int emptyResId = 0;
     private int loadingResId = 0;
     private int netWorkErrorResId = 0;
-    private StateViewReloadListener stateViewReloadListener;
+    private StatusViewReloadClickListener stateViewReloadListener;
 
     public StatusView(@NonNull Context context) {
         this(context, null);
@@ -98,6 +96,7 @@ public class StatusView extends FrameLayout implements View.OnClickListener {
         return this;
     }
 
+    @Override
     public final void showLoading() {
         if (loadingResId == 0) {
             loadingResId = StatusViewConfig.CONFIG.loadingResId;
@@ -105,6 +104,7 @@ public class StatusView extends FrameLayout implements View.OnClickListener {
         show(loadingResId);
     }
 
+    @Override
     public final void showEmpty() {
         if (emptyResId == 0) {
             emptyResId = StatusViewConfig.CONFIG.emptyResId;
@@ -112,6 +112,7 @@ public class StatusView extends FrameLayout implements View.OnClickListener {
         show(emptyResId);
     }
 
+    @Override
     public final void showError() {
         if (errorResId == 0) {
             errorResId = StatusViewConfig.CONFIG.errorResId;
@@ -119,6 +120,7 @@ public class StatusView extends FrameLayout implements View.OnClickListener {
         show(errorResId);
     }
 
+    @Override
     public final void showNetWorkError() {
         if (netWorkErrorResId == 0) {
             netWorkErrorResId = StatusViewConfig.CONFIG.netWorkErrorResId;
@@ -126,19 +128,21 @@ public class StatusView extends FrameLayout implements View.OnClickListener {
         show(netWorkErrorResId);
     }
 
+    @Override
     public final void showContent() {
         show(StatusViewConfig.CONTENT_RES_ID);
     }
 
     private void show(int resId) {
-        for (View view : mResIdMap.values()) {
+        for (int i = 0; i < mResIdMap.size(); i++) {
+            View view = mResIdMap.valueAt(i);
             view.setVisibility(GONE);
         }
         getView(resId).setVisibility(VISIBLE);
     }
 
     private View getView(int resId) {
-        if (mResIdMap.containsKey(resId)) {
+        if (mResIdMap.get(resId) != null) {
             return mResIdMap.get(resId);
         }
         View view = mInflater.inflate(resId, this, false);
@@ -157,7 +161,7 @@ public class StatusView extends FrameLayout implements View.OnClickListener {
         return view;
     }
 
-    public StatusView setStateViewReloadListener(StateViewReloadListener stateViewReloadListener) {
+    public StatusView setStateViewReloadListener(StatusViewReloadClickListener stateViewReloadListener) {
         this.stateViewReloadListener = stateViewReloadListener;
         return this;
     }
@@ -168,9 +172,5 @@ public class StatusView extends FrameLayout implements View.OnClickListener {
             stateViewReloadListener.onStateViewReloadClicked();
         }
         showLoading();
-    }
-
-    public interface StateViewReloadListener {
-        void onStateViewReloadClicked();
     }
 }

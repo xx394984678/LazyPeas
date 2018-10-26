@@ -1,4 +1,4 @@
-package com.lirui.lazypeas.view;
+package com.lirui.lazypeas.library.view;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
