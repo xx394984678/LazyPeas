@@ -1,11 +1,11 @@
 package com.lirui.lazypeas.library.baseui;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.lirui.lazypeas.library.presenter.BasePresenter;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.lirui.lazypeas.library.view.statusview.StatusView;
 import com.lirui.lazypeas.library.view.statusview.StatusViewControl;
 import com.lirui.lazypeas.library.view.statusview.StatusViewReloadClickListener;
@@ -35,9 +35,6 @@ public abstract class BaseActivityInLibrary extends AppCompatActivity implements
 
     @Override
     protected void onDestroy() {
-        if (getPageDataPresenter() != null) {
-            getPageDataPresenter().unBindView();
-        }
         presenterUnBindView();
         ActivityManager.removeActivity(this);
         super.onDestroy();
@@ -102,8 +99,6 @@ public abstract class BaseActivityInLibrary extends AppCompatActivity implements
     }
 
     protected abstract StatusView getStatusView();
-
-    protected abstract BasePresenter getPageDataPresenter();
 
     protected abstract void presenterUnBindView();
 }

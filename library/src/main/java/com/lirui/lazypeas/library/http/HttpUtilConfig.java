@@ -1,6 +1,6 @@
 package com.lirui.lazypeas.library.http;
 
-import android.support.annotation.IntDef;
+import androidx.annotation.IntDef;
 
 public class HttpUtilConfig {
 

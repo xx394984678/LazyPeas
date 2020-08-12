@@ -1,0 +1,46 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'//去除find view by id
+apply plugin: 'kotlin-kapt'//kotlin 使用room 插件
+
+kapt {
+    generateStubs = true
+}
+android {
+    compileSdkVersion var.compileSdkVersion
+
+    defaultConfig {
+        applicationId "com.lirui.jetpack"
+        minSdkVersion var.minSdkVersion
+        targetSdkVersion var.targetSdkVersion
+        versionCode var.versionCode
+        versionName var.versionName
+
+    }
+
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation group: 'androidx.lifecycle', name: 'lifecycle-extensions', version: '2.2.0'
+    implementation group: 'androidx.lifecycle', name: 'lifecycle-livedata', version: '2.3.0-alpha06'
+    debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
+    debugImplementation 'im.dino:dbinspector:4.0.0'
+    // room
+    implementation "androidx.room:room-runtime:2.3.0-alpha02"
+    implementation "androidx.room:room-ktx:2.3.0-alpha02"
+    kapt "androidx.room:room-compiler:2.3.0-alpha02"
+
+    //协程
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$var.kotlin_coroutines"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$var.kotlin_coroutines"
+}

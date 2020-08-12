@@ -1,1 +1,2 @@
+include ':jetpack'
 include ':app', ':library'

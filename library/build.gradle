@@ -9,7 +9,7 @@ android {
         versionCode var.versionCode
         versionName var.versionName
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
 
     }
 
@@ -24,11 +24,13 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    api "com.android.support:appcompat-v7:$var.supportLibraryVersion"
+    api "androidx.appcompat:appcompat:$var.androidxVersion"
+    api "androidx.recyclerview:recyclerview:$var.recyclerViewVersion"
     api "com.squareup.retrofit2:retrofit:$var.retrofitVersion"
     api "com.squareup.okhttp3:okhttp:$var.okhttpVersion"
-    api "com.android.support.constraint:constraint-layout:$var.constraintVersion"
+    api 'androidx.constraintlayout:constraintlayout:1.1.3'
     api "com.alibaba:fastjson:$var.fastjsonVersion"
     api "com.squareup.retrofit2:converter-gson:$var.gsonForRetrofit"
     api "com.github.bumptech.glide:glide:$var.glideVersion"
+    debugImplementation 'com.amitshekhar.android:debug-db:1.0.3'
 }
