@@ -5,8 +5,9 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "student")
-class Student(id: Int, name: String, age: String) {
+class Student(id: Int, name: String, age: String, sex: String?) {
 
+    constructor(name: String, age: String, sex: String) : this(0, name, age, sex)
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id",typeAffinity = ColumnInfo.INTEGER)
@@ -18,9 +19,13 @@ class Student(id: Int, name: String, age: String) {
     @ColumnInfo(name = "age",typeAffinity = ColumnInfo.TEXT)
     var age: String? = null
 
+    @ColumnInfo(name = "sex",typeAffinity = ColumnInfo.TEXT)
+    var sex: String? = null
+
     init {
         this.id = id
         this.name = name
         this.age = age
+        this.sex = sex
     }
 }
