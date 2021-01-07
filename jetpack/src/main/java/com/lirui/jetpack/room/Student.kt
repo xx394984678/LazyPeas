@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "student")
+@Entity(tableName = "student", indices = [androidx.room.Index(value = ["name"], unique = true)])
 class Student(id: Int, name: String, age: String, sex: String?) {
 
     constructor(name: String, age: String, sex: String) : this(0, name, age, sex)

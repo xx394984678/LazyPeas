@@ -20,6 +20,9 @@ android {
 
 
     buildTypes {
+        debug {
+            minifyEnabled false
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -29,13 +32,13 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation project(":library")
     //live data  在compat包里 也有相关代码 只不过不是最新的
-//    implementation group: 'androidx.lifecycle', name: 'lifecycle-extensions', version: '2.2.0'
+    implementation group: 'androidx.lifecycle', name: 'lifecycle-extensions', version: '2.2.0'
 //    implementation group: 'androidx.lifecycle', name: 'lifecycle-livedata', version: '2.3.0-alpha06'
 
     implementation "androidx.lifecycle:lifecycle-viewmodel:2.2.0"
+    implementation "androidx.paging:paging-runtime:2.1.2"
 
     //db 查看器
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'

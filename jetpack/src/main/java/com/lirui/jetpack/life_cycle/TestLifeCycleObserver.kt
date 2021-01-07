@@ -6,16 +6,16 @@ import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.OnLifecycleEvent
 
-class TestLifeCycleObserver :LifecycleObserver{
+open class TestLifeCycleObserver :LifecycleObserver{
 
     private val TAG = "TestLifeCycleObserver"
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
-    fun onCreate(owner: LifecycleOwner) {
+    open fun onCreate(owner: LifecycleOwner) {
         Log.d(TAG, "onCreate: ")
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
-    fun onStop(owner: LifecycleOwner) {
+    open fun onStop(owner: LifecycleOwner) {
         Log.d(TAG, "onStop: ")
     }
 
